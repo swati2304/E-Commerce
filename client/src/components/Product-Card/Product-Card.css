@@ -1,0 +1,27 @@
+.product-card{
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px;
+    width: 230px;
+    border-radius: 15px;
+    background-color: aliceblue;
+    margin-left: 30px;
+    text-align: center;
+}
+.product-image{
+    width: auto;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: black;
+    color: aliceblue;
+    font-size: large;
+}

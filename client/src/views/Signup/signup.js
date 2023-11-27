@@ -8,7 +8,7 @@ function Signup(){
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
 
-    const signup = async ()=>{
+    const signup = async () => {
         const response = await axios.post("/signup",{
             name:name,
             email:email,
@@ -16,7 +16,7 @@ function Signup(){
             password:password
         });
         if(response.data.success){
-            alert(response.data.massage)
+            alert('Signup Successfully');
             window.location.href = "/login";
         }
     }

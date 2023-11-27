@@ -54,13 +54,13 @@ app.get("/product", async (req, res)=>{
 app.get("/product/:id", async (req, res)=>{
     const {id} = req.params;
 
-    const product = await Product.find({_id:id});
+    const product = await Product.findOne({_id:id});
     res.json({
         success: "true",
         data : product,
         massage: 'product retrived successfully'
     })
-})
+});
 app.delete("/product/:id", async (req, res)=>{
     const {id} = req.params;
 
@@ -70,7 +70,7 @@ app.delete("/product/:id", async (req, res)=>{
         data : "product",
         massage: 'product deleted successfully'
     })
-})
+});
 app.put("/product/:id", async (req, res)=>{
     const {id} = req.params;
     const {name, price, description, image} = req.body
@@ -87,7 +87,7 @@ app.put("/product/:id", async (req, res)=>{
         data : updatedProduct,
         massage: 'product Updated successfully'
     })
-})
+});
 
 app.post("/signup", async (req, res) => {
     const { name, email, password, mobile} = req.body;
@@ -110,8 +110,7 @@ app.post("/signup", async (req, res) => {
     } catch (err) {
       res.json({
         success: false,
-        message: err.message,
-      });
+        message: err.message,});
   }
   });
 
@@ -134,7 +133,25 @@ app.post("/signup", async (req, res) => {
     }
   });
 
-const port = 5000;
+app.post("/order", async (req, res)=>{
+    const {product, user, quantity, shippingAddress} = req.body
+
+    const order = new Order ({
+        product: product,
+        user : user,
+        quantity : quantity,
+        shippingAddress:shippingAddress
+    })
+    const savedOrder = await order.save();
+    return res.json({
+        success: true,
+        data: savedOrder,
+        massage: "Product Ordered Successfully"
+    })
+})
+
+
+  const port = 5000;
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
 });

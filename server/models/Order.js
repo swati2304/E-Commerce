@@ -13,7 +13,7 @@ const orderSchema = new Schema({
         type: Number,
         default : 1,
     },
-    shippindAddress:{
+    shippingAddress:{
         type : String,
         required: true
     }

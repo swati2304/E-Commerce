@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import Product from './models/models.js';
 import User from './models/User.js';
+import Order from './models/Order.js';
 
 const app = express();
 app.use(express.json());
@@ -140,7 +141,7 @@ app.post("/order", async (req, res)=>{
         product: product,
         user : user,
         quantity : quantity,
-        shippingAddress:shippingAddress
+        shippingAddress : shippingAddress
     })
     const savedOrder = await order.save();
     return res.json({
@@ -149,9 +150,20 @@ app.post("/order", async (req, res)=>{
         massage: "Product Ordered Successfully"
     })
 })
+app.get("/orders", async(req, res)=>{
+    const {id} = req.query;
+  
+    const orders = await Order.find({user: id}).populate("product user");
+  
+    res.json({
+      success: true,
+      data: orders,
+      message: "Orders retrieved successfully"
+    })
+  })
+  
 
-
-  const port = 5000;
+const port = 5000;
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
 });
